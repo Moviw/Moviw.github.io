@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .m { stroke: #1c1c1e; }
+    .core { fill: #b8336a; }
+    @media (prefers-color-scheme: dark) {
+      .m { stroke: #ececef; }
+      .core { fill: #f07fae; }
+    }
+  </style>
+  <path class="m" d="M6 25 L6 8 L16 18 L26 8 L26 25" fill="none" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle class="core" cx="16" cy="18" r="3.8"/>
+</svg>

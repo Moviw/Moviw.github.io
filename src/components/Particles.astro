@@ -1,0 +1,109 @@
+<canvas id="particles" aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 h-full w-full"></canvas>
+
+<script>
+  // Points drifting around, joined by lines when close; the cursor pulls nearby points in.
+  const canvas = document.getElementById("particles") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d")!;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const LINK = 120; // px between points to draw a line
+  const MOUSE = 180; // px radius of cursor pull
+
+  type P = { x: number; y: number; vx: number; vy: number };
+  let points: P[] = [];
+  let w = 0;
+  let h = 0;
+  let frame = 0;
+  const mouse = { x: -1e4, y: -1e4 };
+  let rgb = "40, 40, 48";
+
+  const readColor = () => {
+    rgb = getComputedStyle(document.documentElement).getPropertyValue("--particle").trim() || rgb;
+  };
+
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.round(Math.min(110, (w * h) / 14000));
+    points = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+    }));
+  };
+
+  const draw = (move: boolean) => {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of points) {
+      if (move) {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const d = Math.hypot(dx, dy);
+        if (d < MOUSE && d > 1) {
+          p.x += (dx / d) * 0.6;
+          p.y += (dy / d) * 0.6;
+        }
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+      }
+      ctx.fillStyle = `rgba(${rgb}, 0.55)`;
+      ctx.fillRect(p.x - 1, p.y - 1, 2, 2);
+    }
+    const all = [...points, mouse];
+    for (let i = 0; i < all.length; i++) {
+      for (let j = i + 1; j < all.length; j++) {
+        const a = all[i];
+        const b = all[j];
+        const limit = j === all.length - 1 ? MOUSE : LINK;
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < limit) {
+          ctx.strokeStyle = `rgba(${rgb}, ${0.22 * (1 - d / limit)})`;
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+  };
+
+  const loop = () => {
+    draw(true);
+    frame = requestAnimationFrame(loop);
+  };
+
+  const start = () => {
+    cancelAnimationFrame(frame);
+    if (reduced.matches || document.hidden) draw(false);
+    else loop();
+  };
+
+  readColor();
+  resize();
+  start();
+
+  window.addEventListener("resize", () => {
+    resize();
+    start();
+  });
+  window.addEventListener("pointermove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  document.addEventListener("pointerleave", () => {
+    mouse.x = mouse.y = -1e4;
+  });
+  document.addEventListener("visibilitychange", start);
+  reduced.addEventListener("change", start);
+  document.addEventListener("themechange", () => {
+    readColor();
+    if (reduced.matches) draw(false);
+  });
+</script>

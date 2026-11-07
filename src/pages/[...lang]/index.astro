@@ -1,0 +1,89 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import Section from "../../components/Section.astro";
+import avatar from "../../assets/avatar.jpg";
+import { ui, langPaths, type Lang } from "../../i18n/ui";
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang].home;
+---
+
+<Base lang={lang}>
+  <section class="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
+    <div class="reveal group relative shrink-0" style="--i:0">
+      <div
+        class="absolute -inset-1.5 rounded-full bg-[conic-gradient(from_0deg,var(--accent),transparent_40%,var(--accent))] opacity-40 blur-sm transition-opacity duration-700 group-hover:opacity-80 motion-safe:animate-[spin_12s_linear_infinite]"
+      >
+      </div>
+      <Image
+        src={avatar}
+        alt={t.name}
+        width={144}
+        height={144}
+        densities={[1, 2]}
+        loading="eager"
+        class="relative size-28 rounded-full border-4 border-[var(--bg)] object-cover transition-transform duration-700 ease-[var(--ease-site)] group-hover:scale-105 sm:size-36"
+      />
+    </div>
+    <div>
+      <h1 class="reveal text-4xl font-semibold tracking-tight sm:text-5xl" style="--i:1">{t.name}</h1>
+      <p class="reveal mt-2 text-[var(--muted)]" style="--i:2">
+        {t.nickname && <span>{t.nickname} · </span>}<span>{t.role}</span>
+      </p>
+      {
+        t.tagline && (
+          <p class="reveal mt-3 font-mono text-sm text-[var(--accent)]" style="--i:3">
+            <span>&gt; {t.tagline}</span><span class="ml-0.5 inline-block w-2 motion-safe:animate-pulse">▍</span>
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="reveal prose-body mt-12 space-y-4 leading-relaxed" style="--i:4">
+    {t.bio.map((p) => <p set:html={p} />)}
+  </section>
+
+  {
+    t.open && (
+  <p
+    class="reveal mt-8 inline-flex items-center gap-2.5 rounded-full border border-[var(--line)] bg-[var(--card)] px-4 py-2 text-sm backdrop-blur"
+    style="--i:5"
+  >
+    <span class="relative flex size-2">
+      <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 motion-safe:animate-ping"></span>
+      <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+    </span>
+    {t.open}
+  </p>
+    )
+  }
+
+  <Section title={t.interestsTitle}>
+    <ul class="flex flex-wrap gap-2">
+      {
+        t.interests.map((x) => (
+          <li class="rounded-md border border-[var(--line)] bg-[var(--card)] px-3 py-1 font-mono text-xs backdrop-blur transition-colors duration-300 hover:border-[var(--accent)]">
+            {x}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section title={t.newsTitle}>
+    <ol class="relative space-y-5 border-l border-[var(--line)] pl-6">
+      {
+        t.news.map((n, i) => (
+          <li class="reveal relative" style={`--i:${i}`}>
+            <span class="absolute top-2 -left-[1.6rem] size-2 rounded-full border-2 border-[var(--bg)] bg-[var(--accent)]" />
+            <time class="font-mono text-xs text-[var(--muted)]">{n.date}</time>
+            <p class="prose-body mt-0.5" set:html={n.html} />
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+</Base>

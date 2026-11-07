@@ -1,0 +1,44 @@
+---
+import { render } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import { ui, href, langs, defaultLang, langName, type Lang } from "../../../i18n/ui";
+import { postsFor, fmtDate, type Resolved } from "../../../lib/blog";
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of langs) {
+    for (const r of await postsFor(lang)) {
+      paths.push({ params: { lang: lang === defaultLang ? undefined : lang, slug: r.slug }, props: { lang, r } });
+    }
+  }
+  return paths;
+}
+
+const { lang, r } = Astro.props as { lang: Lang; r: Resolved };
+const t = ui[lang].blog;
+const { post } = r;
+const { Content } = await render(post);
+---
+
+<Base lang={lang} title={post.data.title} description={post.data.description}>
+  <a href={href(lang, "/blog/")} class="reveal font-mono text-xs text-[var(--muted)] hover:text-[var(--fg)]">{t.back}</a>
+  <h1 class="reveal mt-6 text-3xl font-semibold tracking-tight" style="--i:1">{post.data.title}</h1>
+  <p class="reveal mt-3 font-mono text-xs text-[var(--muted)]" style="--i:2">
+    {fmtDate(post.data.date)}
+    {post.data.tags.map((tag) => <span class="ml-3">#{tag}</span>)}
+  </p>
+  {
+    r.fallback && (
+      <p class="reveal mt-6 rounded-lg border border-[var(--line)] bg-[var(--card)] px-4 py-3 text-sm text-[var(--muted)]" style="--i:3">
+        {t.fallback(langName(r.postLang, lang))}
+      </p>
+    )
+  }
+  <article
+    lang={r.postLang}
+    class="reveal prose-body prose mt-10 max-w-none dark:prose-invert prose-headings:tracking-tight prose-a:text-[var(--accent)]"
+    style="--i:4"
+  >
+    <Content />
+  </article>
+</Base>

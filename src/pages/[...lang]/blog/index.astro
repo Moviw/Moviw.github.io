@@ -1,0 +1,71 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { ui, href, langPaths, type Lang } from "../../../i18n/ui";
+import { postsFor, fmtDate } from "../../../lib/blog";
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang].blog;
+const posts = await postsFor(lang);
+const tags = [...new Set(posts.flatMap((p) => p.post.data.tags))].sort();
+---
+
+<Base lang={lang} title={t.title}>
+  <h1 class="reveal text-3xl font-semibold tracking-tight">{t.title}</h1>
+  <p class="reveal mt-3 text-[var(--muted)]" style="--i:1">{t.intro}</p>
+
+  {
+    posts.length === 0 ? (
+      <p class="reveal mt-12 font-mono text-sm text-[var(--muted)]" style="--i:2">
+        {t.empty}
+      </p>
+    ) : (
+      <>
+        {tags.length > 0 && (
+          <div id="tags" class="reveal mt-8 flex flex-wrap gap-2" style="--i:2">
+            {["", ...tags].map((tag) => (
+              <button
+                type="button"
+                data-tag={tag}
+                class="rounded-md border border-[var(--line)] px-2.5 py-0.5 font-mono text-xs text-[var(--muted)] transition-colors duration-300 hover:text-[var(--fg)] data-[on]:border-[var(--accent)] data-[on]:text-[var(--accent)]"
+                data-on={tag === "" ? "" : undefined}
+              >
+                {tag === "" ? t.all : `#${tag}`}
+              </button>
+            ))}
+          </div>
+        )}
+        <ul class="mt-8 divide-y divide-[var(--line)]">
+          {posts.map(({ slug, post }, i) => (
+            <li class="reveal" style={`--i:${i}`} data-tags={post.data.tags.join(" ")}>
+              <a href={href(lang, `/blog/${slug}/`)} class="group flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-6">
+                <time class="shrink-0 font-mono text-xs text-[var(--muted)]">{fmtDate(post.data.date)}</time>
+                <span>
+                  <span class="font-medium transition-colors duration-300 group-hover:text-[var(--accent)]">
+                    {post.data.title}
+                  </span>
+                  {post.data.description && (
+                    <span class="mt-1 block text-sm text-[var(--muted)]">{post.data.description}</span>
+                  )}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <script>
+    const bar = document.getElementById("tags");
+    bar?.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("button[data-tag]");
+      if (!btn) return;
+      const tag = btn.dataset.tag!;
+      bar.querySelectorAll("button").forEach((b) => b.toggleAttribute("data-on", b === btn));
+      document.querySelectorAll<HTMLElement>("li[data-tags]").forEach((li) => {
+        li.hidden = tag !== "" && !li.dataset.tags!.split(" ").includes(tag);
+      });
+    });
+  </script>
+</Base>
