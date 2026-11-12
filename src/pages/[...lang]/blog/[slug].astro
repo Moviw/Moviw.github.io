@@ -2,16 +2,13 @@
 import "katex/dist/katex.min.css";
 import { render } from "astro:content";
 import Base from "../../../layouts/Base.astro";
-import { ui, href, langs, defaultLang, langName, type Lang } from "../../../i18n/ui";
+import { ui, href, langPaths, langName, type Lang } from "../../../i18n/ui";
 import { postsFor, fmtDate, type Resolved } from "../../../lib/blog";
 
 export async function getStaticPaths() {
-  const paths = [];
-  for (const lang of langs) {
-    for (const r of await postsFor(lang)) {
-      paths.push({ params: { lang: lang === defaultLang ? undefined : lang, slug: r.slug }, props: { lang, r } });
-    }
-  }
+  const paths: any[] = [];
+  for (const { params, props } of langPaths())
+    for (const r of await postsFor(props.lang)) paths.push({ params: { ...params, slug: r.slug }, props: { ...props, r } });
   return paths;
 }
 

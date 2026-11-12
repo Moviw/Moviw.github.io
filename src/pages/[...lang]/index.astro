@@ -32,13 +32,6 @@ const t = ui[lang].home;
       <p class="reveal mt-2 text-[var(--muted)]" style="--i:2">
         {t.nickname && <span>{t.nickname} · </span>}<span>{t.role}</span>
       </p>
-      {
-        t.tagline && (
-          <p class="reveal mt-3 font-mono text-sm text-[var(--accent)]" style="--i:3">
-            <span>&gt; {t.tagline}</span><span class="ml-0.5 inline-block w-2 motion-safe:animate-pulse">▍</span>
-          </p>
-        )
-      }
     </div>
   </section>
 

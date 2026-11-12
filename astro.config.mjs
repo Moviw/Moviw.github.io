@@ -11,9 +11,4 @@ export default defineConfig({
   integrations: [icon()],
   markdown: { processor: unified({ remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] }) },
   vite: { plugins: [tailwindcss()] },
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "zh"],
-    routing: { prefixDefaultLocale: false },
-  },
 });
