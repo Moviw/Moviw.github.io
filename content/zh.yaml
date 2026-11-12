@@ -1,0 +1,80 @@
+# 中文版页面的所有文字。写法同 en.yaml。
+
+meta:
+  description: 许子墨（Movi），东京大学硕士生，研究多模态学习与混合专家（MoE）模型。
+nav:
+  home: 首页
+  experience: 经历
+  blog: 博客
+  about: 关于
+home:
+  name: 许子墨
+  role: 东京大学 硕士在读
+  bio:
+    - 我是东京大学 情报理工学系研究科（IST）的硕士二年级学生，在[中山研究室](lab)，导师是中山英树教授。
+    - 我的研究方向是多模态学习和混合专家（MoE）模型：让模型同时理解图像、3D 场景和语言，并借助稀疏专家结构高效地扩展规模。同时也关注强化学习和 Agent 系统。
+    - 目前在 Yodo Labs 担任 Research Scientist 实习生，做能在点云中进行度量推理的 3D 多模态大模型。
+  open: 正在寻找多模态 AI 方向的研究或工程机会，欢迎联系我。
+  interestsTitle: 研究兴趣
+  interests:
+    - 多模态学习
+    - 混合专家（MoE）
+    - 3D 视觉
+    - 强化学习
+    - Agent 系统
+  newsTitle: 动态
+  news:
+    - date: "2026.08"
+      text: 加入 [Yodo Labs](yodo)，担任 Research Scientist 实习生。
+    - date: "2025.04"
+      text: 进入东京大学[中山研究室](lab)攻读硕士。
+    - date: "2024.10"
+      text: 作为 Research Student 进入九州大学[智能系统研究室（LIS）](lis)。
+    - date: "2024.07"
+      text: 本科毕业于北京工业大学信息学部。
+exp:
+  title: 经历
+  workTitle: 工作
+  work:
+    - when: 2026.08 – 至今
+      title: Research Scientist 实习生
+      org: Yodo Labs
+      orgUrl: yodo
+      where: 东京（远程）
+      detail: 3D 多模态大模型，点云上的度量推理。
+  eduTitle: 教育
+  edu:
+    - when: 2025.04 – 至今
+      title: 情报理工学系研究科（IST） 硕士
+      org: 东京大学
+      detail: "[中山研究室](lab)，导师中山英树教授。多模态学习、混合专家模型、计算机视觉。"
+    - when: 2024.10 – 2025.03
+      title: 研究生（Research Student）
+      org: 九州大学
+      detail: 系统信息学研究课 [智能系统研究室（LIS）](lis)，课题：强化学习与自适应 AI。
+    - when: – 2024.07
+      title: 本科
+      org: 北京工业大学
+      detail: 信息学部。
+blog:
+  title: 博客
+  intro: 关于研究、工具和东京生活的一些记录。
+  empty: 这里还什么都没有，第一篇在路上了。
+  all: 全部
+  fallback: 这篇文章还没有中文版，下面显示的是{lang}原文。
+  back: ← 所有文章
+about:
+  title: 关于
+  intro:
+    - 你好，我是许子墨，现在在东京大学中山英树研究室读硕士。
+    - 在中国长大，本科在北京，之后以 Research Student 的身份在福冈的九州大学待过半年，现在住在东京。
+  hobbiesTitle: Interests
+  hobbies:
+    - 🎸 吉他
+    - 🏀 篮球
+    - 🎤 唱歌
+    - 🎮 PS5 和 Switch
+  findTitle: Find Me
+  email: 邮箱
+footer: 使用 Astro 构建。
+theme: 切换主题

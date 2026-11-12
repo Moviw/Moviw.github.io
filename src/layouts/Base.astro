@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import { Icon } from "astro-icon/components";
 import Particles from "../components/Particles.astro";
-import { ui, langs, href, type Lang } from "../i18n/ui";
+import { ui, site, langs, href, type Lang } from "../i18n/ui";
 
 interface Props {
   lang: Lang;
@@ -12,8 +12,7 @@ interface Props {
 const { lang, title, description } = Astro.props;
 const t = ui[lang];
 const base = Astro.url.pathname.replace(/^\/zh(?=\/|$)/, "") || "/";
-const name = t.home.name;
-const pageTitle = title ? `${title} · ${name}` : lang === "en" ? "Zimo Xu · Movi" : name;
+const pageTitle = title ? `${title} · ${site.name}` : site.homeTitle;
 const nav = [
   { path: "/", label: t.nav.home },
   { path: "/experience/", label: t.nav.experience },
@@ -93,7 +92,7 @@ const htmlLang = { en: "en", zh: "zh-CN" }[lang];
     </main>
 
     <footer class="mx-auto max-w-3xl px-4 pb-10 text-xs text-[var(--muted)] sm:px-6">
-      © {new Date().getFullYear()} Zimo Xu · {t.footer}
+      © {new Date().getFullYear()} {site.name} · {t.footer}
     </footer>
 
     <script>

@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import Section from "../../components/Section.astro";
-import avatar from "../../assets/avatar.jpg";
+import avatar from "../../../content/avatar.jpg";
 import { ui, langPaths, type Lang } from "../../i18n/ui";
 
 export const getStaticPaths = langPaths;
@@ -80,7 +80,7 @@ const t = ui[lang].home;
           <li class="reveal relative" style={`--i:${i}`}>
             <span class="absolute top-2 -left-[1.6rem] size-2 rounded-full border-2 border-[var(--bg)] bg-[var(--accent)]" />
             <time class="font-mono text-xs text-[var(--muted)]">{n.date}</time>
-            <p class="prose-body mt-0.5" set:html={n.html} />
+            <p class="prose-body mt-0.5" set:html={n.text} />
           </li>
         ))
       }

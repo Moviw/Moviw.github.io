@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Section from "../../components/Section.astro";
-import { ui, langPaths, type Lang } from "../../i18n/ui";
+import { ui, url, langPaths, type Lang } from "../../i18n/ui";
 
 export const getStaticPaths = langPaths;
 const { lang } = Astro.props as { lang: Lang };
@@ -28,7 +28,7 @@ const groups = [
                 <time class="font-mono text-xs text-[var(--muted)]">{e.when}</time>
               </div>
               <p class="prose-body mt-0.5 text-sm text-[var(--muted)]">
-                {e.orgUrl ? <a href={e.orgUrl} target="_blank" rel="noopener">{e.org}</a> : e.org}
+                {e.orgUrl ? <a href={url(e.orgUrl)} target="_blank" rel="noopener">{e.org}</a> : e.org}
                 {e.where && <span> · {e.where}</span>}
               </p>
               {e.detail && <p class="prose-body mt-3 text-sm leading-relaxed" set:html={e.detail} />}

@@ -2,9 +2,9 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-// Posts live in src/content/blog/<lang>/<slug>.md — the same slug in each language is the same post.
+// Posts live in content/blog/<lang>/<slug>.md — the same slug in each language is the same post.
 const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./content/blog" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),

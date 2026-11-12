@@ -1,0 +1,34 @@
+# 两种语言共用的信息。
+
+name: Zimo Xu            # 页脚和浏览器标签里用的名字
+homeTitle: Zimo Xu · Movi  # 首页的浏览器标签
+
+# 别处用 [文字](名字) 引用这里的链接
+links:
+  lab: https://www.nlab.ci.i.u-tokyo.ac.jp/
+  lis: https://lis.inf.kyushu-u.ac.jp/
+  yodo: https://yodolabs.jp/en
+
+# 邮箱拆成两段写，防爬虫
+email:
+  user: xuzimo333
+  domain: nlab-mpg.jp
+
+# About 页 “Find me” 里的卡片。icon 去 https://icon-sets.iconify.design/ri/ 找
+socials:
+  - name: GitHub
+    handle: Moviw
+    url: https://github.com/Moviw
+    icon: ri:github-fill
+  - name: LinkedIn
+    handle: zimo-xu
+    url: https://www.linkedin.com/in/zimo-xu/
+    icon: ri:linkedin-box-fill
+  - name: { en: Zhihu, zh: 知乎 }
+    handle: Movix333
+    url: https://www.zhihu.com/people/Movix333
+    icon: ri:zhihu-line
+  - name: Instagram
+    handle: movix333
+    url: https://www.instagram.com/movix333/
+    icon: ri:instagram-line

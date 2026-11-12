@@ -1,4 +1,5 @@
 ---
+import "katex/dist/katex.min.css";
 import { render } from "astro:content";
 import Base from "../../../layouts/Base.astro";
 import { ui, href, langs, defaultLang, langName, type Lang } from "../../../i18n/ui";
@@ -30,7 +31,7 @@ const { Content } = await render(post);
   {
     r.fallback && (
       <p class="reveal mt-6 rounded-lg border border-[var(--line)] bg-[var(--card)] px-4 py-3 text-sm text-[var(--muted)]" style="--i:3">
-        {t.fallback(langName(r.postLang, lang))}
+        {t.fallback.replace("{lang}", langName(r.postLang, lang))}
       </p>
     )
   }

@@ -2,17 +2,12 @@
 import { Icon } from "astro-icon/components";
 import Base from "../../layouts/Base.astro";
 import Section from "../../components/Section.astro";
-import { ui, links, email, langPaths, type Lang } from "../../i18n/ui";
+import { ui, site, email, langPaths, type Lang } from "../../i18n/ui";
 
 export const getStaticPaths = langPaths;
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang].about;
-const socials = [
-  { name: "GitHub", handle: "Moviw", url: links.github, icon: "ri:github-fill" },
-  { name: "LinkedIn", handle: "zimo-xu", url: links.linkedin, icon: "ri:linkedin-box-fill" },
-  { name: lang === "en" ? "Zhihu" : "知乎", handle: "Movix333", url: links.zhihu, icon: "ri:zhihu-line" },
-  { name: "Instagram", handle: "movix333", url: links.instagram, icon: "ri:instagram-line" },
-];
+const socials = site.socials.map((s) => ({ ...s, name: typeof s.name === "string" ? s.name : s.name[lang] }));
 const card =
   "group flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--card)] px-4 py-3 backdrop-blur transition-[border-color,transform] duration-700 ease-[var(--ease-site)] hover:-translate-y-0.5 hover:border-[var(--accent)]";
 ---

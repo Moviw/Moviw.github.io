@@ -1,0 +1,82 @@
+# 英文版页面的所有文字。改完保存即可（npm run dev 会自动刷新）。
+# 链接写法：[显示的文字](lab)  —— 括号里写 site.yaml 里 links 的名字，或者直接写完整网址
+# 带冒号的句子用英文双引号包起来，比如 "Theme: robust AI"
+
+meta:
+  description: Zimo Xu (Movi) — M.S. student at The University of Tokyo working on multimodal learning and mixture-of-experts models.
+nav:
+  home: Home
+  experience: Experience
+  blog: Blog
+  about: About
+home:
+  name: Zimo Xu
+  nickname: a.k.a. Movi
+  role: M.S. student @ The University of Tokyo
+  bio:
+    - I'm a second-year master's student in the Graduate School of Information Science and Technology (IST) at The University of Tokyo, advised by Prof. Hideki Nakayama at the [Nakayama Lab](lab).
+    - "My research is on multimodal learning and mixture-of-experts (MoE) models: building models that understand images, 3D scenes and language together, and scaling them efficiently with sparse experts. I am also interested in reinforcement learning and agent systems."
+    - Right now I'm a Research Scientist Intern at Yodo Labs, building 3D multimodal LLMs that reason about metric geometry in point clouds.
+  interestsTitle: Interests
+  interests:
+    - Multimodal learning
+    - Mixture-of-Experts
+    - 3D vision
+    - Reinforcement learning
+    - Agent systems
+  newsTitle: News
+  news:
+    - date: "2026.08"
+      text: Joined [Yodo Labs](yodo) as a Research Scientist Intern.
+    - date: "2025.04"
+      text: Started my M.S. at The University of Tokyo, [Nakayama Lab](lab).
+    - date: "2024.10"
+      text: Joined the [Laboratory of Intelligent Systems](lis) at Kyushu University as a research student.
+    - date: "2024.07"
+      text: Graduated from the Faculty of Information Technology, Beijing University of Technology.
+exp:
+  title: Experience
+  workTitle: Work
+  work:
+    - when: 2026.08 – present
+      title: Research Scientist Intern
+      org: Yodo Labs
+      orgUrl: yodo
+      where: Tokyo (remote)
+      detail: 3D multimodal LLMs and grounded metric reasoning on point clouds.
+  eduTitle: Education
+  edu:
+    - when: 2025.04 – present
+      title: M.S., Graduate School of Information Science and Technology (IST)
+      org: The University of Tokyo
+      detail: "[Nakayama Lab](lab), advised by Prof. Hideki Nakayama. Multimodal learning, mixture-of-experts, computer vision."
+    - when: 2024.10 – 2025.03
+      title: Research Student
+      org: Kyushu University
+      detail: "[Laboratory of Intelligent Systems (LIS)](lis), Department of Informatics. Theme: robust and adaptive AI."
+    - when: – 2024.07
+      title: Undergraduate
+      org: Beijing University of Technology
+      detail: Faculty of Information Technology.
+blog:
+  title: Blog
+  intro: Notes on research, tools, and life in Tokyo.
+  empty: Nothing here yet. The first post is on its way.
+  all: All
+  fallback: This post isn't available in English yet. Showing the {lang} original.
+  back: ← All posts
+about:
+  title: About
+  intro:
+    - Hi, I'm Zimo. Most people call me Movi. I'm currently a master's student at the Nakayama Lab, The University of Tokyo.
+    - I grew up in China, did my undergrad in Beijing, spent half a year at Kyushu University in Fukuoka as a research student, and now live in Tokyo.
+  hobbiesTitle: Off the clock
+  hobbies:
+    - 🎸 Guitar
+    - 🏀 Basketball
+    - 🎤 Singing
+    - 🎮 PS5 & Switch
+  findTitle: Find me
+  email: Email
+footer: Built with Astro.
+theme: Toggle theme
