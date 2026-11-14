@@ -1,12 +1,8 @@
 ---
-interface Props {
-  title: string;
-  i?: number;
-}
-const { title, i = 0 } = Astro.props;
+const { title } = Astro.props as { title: string };
 ---
 
-<section class="reveal mt-14" style={`--i:${i}`}>
+<section class="reveal mt-14">
   <h2 class="mb-5 font-mono text-xs font-medium tracking-[0.18em] text-[var(--muted)] uppercase">{title}</h2>
   <slot />
 </section>

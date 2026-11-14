@@ -14,21 +14,11 @@ email:
   user: xuzimo333
   domain: nlab-mpg.jp
 
-# About 页 “Find me” 里的卡片。icon 去 https://icon-sets.iconify.design/ri/ 找
+# 左侧栏头像下面的图标（邮箱图标会自动放在最前面）。icon 去 https://icon-sets.iconify.design/ri/ 找
 socials:
   - name: GitHub
-    handle: Moviw
     url: https://github.com/Moviw
     icon: ri:github-fill
   - name: LinkedIn
-    handle: zimo-xu
     url: https://www.linkedin.com/in/zimo-xu/
     icon: ri:linkedin-box-fill
-  - name: { en: Zhihu, zh: 知乎 }
-    handle: Movix333
-    url: https://www.zhihu.com/people/Movix333
-    icon: ri:zhihu-line
-  - name: Instagram
-    handle: movix333
-    url: https://www.instagram.com/movix333/
-    icon: ri:instagram-line

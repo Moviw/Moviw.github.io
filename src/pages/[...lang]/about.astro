@@ -1,16 +1,11 @@
 ---
-import { Icon } from "astro-icon/components";
 import Base from "../../layouts/Base.astro";
 import Section from "../../components/Section.astro";
-import { ui, site, langPaths, type Lang } from "../../i18n/ui";
+import { ui, langPaths, type Lang } from "../../i18n/ui";
 
 export const getStaticPaths = langPaths;
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang].about;
-const { email } = site;
-const socials = site.socials.map((s) => ({ ...s, name: typeof s.name === "string" ? s.name : s.name[lang] }));
-const card =
-  "group flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--card)] px-4 py-3 backdrop-blur transition-[border-color,transform] duration-700 ease-[var(--ease-site)] hover:-translate-y-0.5 hover:border-[var(--accent)]";
 ---
 
 <Base lang={lang} title={t.title}>
@@ -31,30 +26,4 @@ const card =
     </ul>
   </Section>
 
-  <Section title={t.findTitle}>
-    <ul class="grid gap-3 sm:grid-cols-2">
-      <li class="reveal">
-        <a class={card} data-user={email.user} data-domain={email.domain} href="#">
-          <Icon name="ri:mail-line" class="size-5 text-[var(--muted)] transition-colors group-hover:text-[var(--accent)]" />
-          <span class="flex flex-col">
-            <span class="text-sm font-medium">{t.email}</span>
-            <span class="font-mono text-xs text-[var(--muted)]" data-addr>{email.user} [at] {email.domain}</span>
-          </span>
-        </a>
-      </li>
-      {
-        socials.map((s, i) => (
-          <li class="reveal" style={`--i:${i + 1}`}>
-            <a class={card} href={s.url} target="_blank" rel="noopener">
-              <Icon name={s.icon} class="size-5 text-[var(--muted)] transition-colors group-hover:text-[var(--accent)]" />
-              <span class="flex flex-col">
-                <span class="text-sm font-medium">{s.name}</span>
-                <span class="font-mono text-xs text-[var(--muted)]">{s.handle}</span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
 </Base>

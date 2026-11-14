@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 import Particles from "../components/Particles.astro";
+import avatar from "../../content/avatar.jpg";
 import { ui, site, langs, href, type Lang } from "../i18n/ui";
 
 interface Props {
@@ -11,11 +13,12 @@ interface Props {
 }
 const { lang, title, description } = Astro.props;
 const t = ui[lang];
+const me = t.home;
 const base = Astro.url.pathname.replace(/^\/zh(?=\/|$)/, "") || "/";
 const pageTitle = title ? `${title} · ${site.name}` : site.homeTitle;
 const nav = [
   { path: "/", label: t.nav.home },
-  { path: "/experience/", label: t.nav.experience },
+  { path: "/#experience", label: t.nav.experience },
   { path: "/blog/", label: t.nav.blog },
   { path: "/about/", label: t.nav.about },
 ];
@@ -55,7 +58,7 @@ const htmlLang = { en: "en", zh: "zh-CN" }[lang];
   </head>
   <body class="min-h-screen font-sans">
     <Particles />
-    <header class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 pt-6 sm:px-6">
+    <header class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 pt-6 sm:px-6">
       <a href={href(lang)} class="font-mono text-sm font-medium tracking-tight">movi<span class="text-[var(--accent)]">.</span></a>
       <nav class="-mr-1.5 flex flex-wrap items-center gap-0.5 text-sm sm:gap-3">
         {
@@ -87,11 +90,50 @@ const htmlLang = { en: "en", zh: "zh-CN" }[lang];
       </nav>
     </header>
 
-    <main class="mx-auto max-w-3xl px-4 pt-16 pb-24 sm:px-6">
-      <slot />
-    </main>
+    <!-- Phone: sidebar on top, one column. md and up: sticky sidebar left, content right. -->
+    <div class="mx-auto max-w-6xl px-4 pt-12 pb-24 sm:px-6 md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-16 md:pt-16">
+      <aside class="reveal flex flex-col items-center text-center md:sticky md:top-12 md:self-start">
+        <div class="group relative">
+          <div
+            class="absolute -inset-1.5 rounded-full bg-[conic-gradient(from_0deg,var(--accent),transparent_40%,var(--accent))] opacity-40 blur-sm transition-opacity duration-700 group-hover:opacity-80 motion-safe:animate-[spin_12s_linear_infinite]"
+          >
+          </div>
+          <Image
+            src={avatar}
+            alt={me.name}
+            width={200}
+            height={200}
+            densities={[1, 2]}
+            loading="eager"
+            class="relative size-36 rounded-full border-4 border-[var(--bg)] object-cover transition-transform duration-700 ease-[var(--ease-site)] group-hover:scale-105 md:size-[200px]"
+          />
+        </div>
+        <p class="mt-6 text-2xl font-semibold tracking-tight">{me.name}</p>
+        {me.nickname && <p class="mt-1 text-sm text-[var(--muted)]">{me.nickname}</p>}
+        <p class="mt-1 text-sm text-[var(--muted)]">{me.role}</p>
+        <ul class="mt-5 flex gap-4 text-[var(--muted)]">
+          <li>
+            <a data-user={site.email.user} data-domain={site.email.domain} href="#" aria-label="Email" title="Email" class="hover:text-[var(--accent)]">
+              <Icon name="ri:mail-line" class="size-5" />
+            </a>
+          </li>
+          {
+            site.socials.map((s) => (
+              <li>
+                <a href={s.url} target="_blank" rel="noopener" aria-label={s.name} title={s.name} class="hover:text-[var(--accent)]">
+                  <Icon name={s.icon} class="size-5" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+      <main class="mt-14 min-w-0 md:mt-0">
+        <slot />
+      </main>
+    </div>
 
-    <footer class="mx-auto max-w-3xl px-4 pb-10 text-xs text-[var(--muted)] sm:px-6">
+    <footer class="mx-auto max-w-6xl px-4 pb-10 text-xs text-[var(--muted)] sm:px-6">
       © {new Date().getFullYear()} {site.name} · {t.footer}
     </footer>
 
@@ -126,8 +168,6 @@ const htmlLang = { en: "en", zh: "zh-CN" }[lang];
       document.querySelectorAll<HTMLAnchorElement>("a[data-user]").forEach((a) => {
         const addr = `${a.dataset.user}@${a.dataset.domain}`;
         a.href = `mailto:${addr}`;
-        const label = a.querySelector("[data-addr]");
-        if (label) label.textContent = addr;
       });
     </script>
   </body>

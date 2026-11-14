@@ -35,7 +35,6 @@ home:
     - date: "2024.07"
       text: Graduated from the Faculty of Information Technology, Beijing University of Technology.
 exp:
-  title: Experience
   workTitle: Work
   work:
     - when: 2026.08 – present
@@ -76,7 +75,5 @@ about:
     - 🏀 Basketball
     - 🎤 Singing
     - 🎮 PS5 & Switch
-  findTitle: Find me
-  email: Email
 footer: Built with Astro.
 theme: Toggle theme
