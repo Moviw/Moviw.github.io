@@ -3,7 +3,7 @@
 # 带冒号的句子用英文双引号包起来，比如 "Theme: robust AI"
 
 meta:
-  description: Zimo Xu (Movi) — M.S. student at The University of Tokyo working on multimodal learning and mixture-of-experts models.
+  description: Zimo Xu (Movi) — M.S. student at The University of Tokyo working on multimodal and mixture-of-experts models.
 nav:
   home: Home
   experience: Experience
@@ -15,13 +15,13 @@ home:
   role: M.S. student @ The University of Tokyo
   bio:
     - I'm a second-year master's student in the Graduate School of Information Science and Technology (IST) at The University of Tokyo, advised by Prof. Hideki Nakayama at the [Nakayama Lab](lab).
-    - "My research is on multimodal learning and mixture-of-experts (MoE) models: building models that understand images, 3D scenes and language together, and scaling them efficiently with sparse experts. I am also interested in reinforcement learning and agent systems."
+    - "My research is on multimodal and mixture-of-experts (MoE) models: building models that understand images, 3D scenes and language together, and scaling them efficiently with sparse experts. I am also interested in reinforcement learning and agent systems."
     - Right now I'm a Research Scientist Intern at Yodo Labs, building 3D multimodal LLMs that reason about metric geometry in point clouds.
   interestsTitle: Interests
   interests:
-    - Multimodal learning
-    - Mixture-of-Experts
-    - 3D vision
+    - Multimodal
+    - Mixture-of-Experts (MoE)
+    - Spatial Understanding
     - Reinforcement learning
     - Agent systems
   newsTitle: News
@@ -35,7 +35,7 @@ home:
     - date: "2024.07"
       text: Graduated from the Faculty of Information Technology, Beijing University of Technology.
 exp:
-  workTitle: Work
+  workTitle: Career
   work:
     - when: 2026.08 – present
       title: Research Scientist Intern
